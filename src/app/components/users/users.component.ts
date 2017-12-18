@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UsersService} from '../../shared/services/users.service';
 import {Paging, User} from '../../models/users.models';
-import {ActivatedRoute, NavigationEnd, Params, Router} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
+import 'rxjs/add/operator/do';
 
 interface UsersPage {
   result: User[];
@@ -17,13 +18,19 @@ interface UsersPage {
 export class UsersComponent implements OnInit, OnDestroy {
   usersPage: UsersPage = { result: [], paging: { page: 0, totalPages: 0 } };
   queryParams$: Subscription;
+  loading = false;
 
   constructor(private usersService: UsersService, private router: Router, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.queryParams$ = this.activatedRoute.queryParams.subscribe((params: Params) => {
-      this.usersService.getUsers(params['page']).subscribe(usersPage => { this.usersPage = usersPage; });
+      this.loading = true;
+      this.usersService.getUsers(params['page']).do(() => { this.loading = false; })
+        .subscribe(usersPage => {
+          this.usersPage = usersPage;
+          this.loading = false;
+        });
     });
   }
 

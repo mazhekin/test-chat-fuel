@@ -1,4 +1,4 @@
-<h1 class="mt-3">User Edit</h1>
+<h1 class="mt-3">User Edit <div class="progress" *ngIf="loading"></div></h1>
 
 <form *ngIf="user" [formGroup]="userForm" (ngSubmit)="submitted = true; userForm.valid && onSubmit()">
 
