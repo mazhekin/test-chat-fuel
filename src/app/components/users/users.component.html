@@ -1,20 +1,15 @@
-<div class="container">
-  <div class="row">
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Username</th>
+    <th><td>
+  </tr>
+  </thead>
+  <tbody>
 
-    <table class="table table-hover">
-      <thead>
-      <tr>
-        <th>#</th>
-        <th>Username</th>
-        <th><td>
-      </tr>
-      </thead>
-      <tbody>
+    <tr *ngFor="let user of users" [appUserRow]="user"></tr>
 
-        <tr *ngFor="let user of users" [appUserRow]="user"></tr>
+  </tbody>
+</table>
 
-      </tbody>
-    </table>
-
-  </div>
-</div>
