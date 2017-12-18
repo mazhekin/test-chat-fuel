@@ -29,7 +29,6 @@ export class UsersService {
 
   saveUser(id: number, user: UserPostModel) {
     const url = this.api + `users/${id}`;
-    const body = JSON.stringify(user);
-    return this.httpClient.put(url, body);
+    return this.httpClient.put(url, user);
   }
 }
