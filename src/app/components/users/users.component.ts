@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {UsersService} from '../../shared/services/users.service';
+import {Paging, User} from '../../models/users.models';
+
+interface UsersPage {
+  result: User[];
+  paging: Paging;
+}
 
 @Component({
   selector: 'app-users',
@@ -6,6 +13,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+
+  usersPage: UsersPage = { result: [], paging: { page: 0, totalPages: 0 } };
 
   users = [
     {id: 1, name: 'Denis', avatarUrl: 'http://img1.jurko.net/avatar_12630.jpg' },
@@ -22,9 +31,10 @@ export class UsersComponent implements OnInit {
     {id: 12, name: 'Edwin', avatarUrl: 'http://img1.jurko.net/avatar_16930.jpg' }
   ];
 
-  constructor() { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit() {
+    this.usersService.getUsers().subscribe(usersPage => { this.usersPage = usersPage; });
   }
 
 }
