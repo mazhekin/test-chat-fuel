@@ -7,6 +7,7 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import {RouterModule} from '@angular/router';
 import {SharedModule} from '../shared/shared.module';
 import { PaginationComponent } from './shared/pagination/pagination.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     PaginationComponent
   ],
   imports: [
+    // FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     RouterModule,
     SharedModule
