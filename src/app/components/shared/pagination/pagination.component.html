@@ -1,0 +1,9 @@
+<nav aria-label="{[label]}">
+  <ul class="pagination">
+    <li class="page-item" [ngClass]="{active: paging.page === pageNumber}" *ngFor="let pageNumber of this.pageNumbers">
+      <a class="page-link" href="#" (click)="pageNumberClicked($event, pageNumber)">
+        {{pageNumber}}
+      </a>
+    </li>
+  </ul>
+</nav>
